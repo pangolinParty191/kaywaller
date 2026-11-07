@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Copilot Video agent · Kay Waller</title>
+  <meta name="description" content="A Copilot agent that enables prompt-to-video creation and multi-turn editing, and democratizes video.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Kay Waller">
+  <meta property="og:title" content="Copilot Video agent · Kay Waller">
+  <meta property="og:description" content="A Copilot agent that enables prompt-to-video creation and multi-turn editing, and democratizes video.">
+  <meta property="og:image" content="assets/share/video-agent.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@200;300;400;500;600&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="--tint:#f7d3e8; --tint-deep:#efb3d6; --accent:#c02a85;">
+  <a class="skip" href="#content">Skip to content</a>
+
+  <header class="phead" data-text="right" style="--text-w:36%; --text-y:52.9%">
+    <nav class="topnav" aria-label="Project">
+      <a href="index.html" aria-label="Back to home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h4.5v-5.5h4V20h4.5V9.5"/></svg></a>
+      <a href="clips.html" aria-label="Next project: Copilot Clips"><span>Next project</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </nav>
+    <div class="hero-banner" style="--hero-pos:50% 50%"><img fetchpriority="high" src="assets/agent/hero-again.jpg" width="2400" height="1071" alt="Copilot Video agent hero image"></div>
+    <div class="hero-text">
+      <h1>Copilot Video agent</h1>
+      <p class="hero-sub">I led and shipped the integration design for Copilot's video agent through 2 strategic pivots and shaped where it lived, who it served, and how people created with it.</p>
+      <a class="jump" href="#final-designs">Jump to final designs<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="overview">
+      <p class="eyebrow">The challenge</p>
+      <p class="challenge">How might we enable prompt-to-video creation and unlock high-quality video output for novice video creators?</p>
+      <div class="meta">
+        <div><p class="eyebrow">My role</p><p>Lead (and sole) designer for the Integrations pod, the team responsible for choosing where and how to integrate the video agent backend.</p></div>
+        <div><p class="eyebrow">Outcome</p><p>Remains to be fully seen, but initial signals from influencer customer rings and leadership within Microsoft rate the agent positively.</p></div>
+        <div><p class="eyebrow">Team</p><p>6 engineers and 1 PM</p></div>
+        <div><p class="eyebrow">Timeframe</p><p>January 2026 - present</p></div>
+      </div>
+    </section>
+
+    <div class="story">
+      <section class="section">
+        <h2 class="reveal">Realizing the potential</h2>
+        <p>After potential for a video agent emerged from a proof of concept made during a team hackathon week, leadership decided to invest multiple teams in developing the proof of concept into a shippable reality. There were 3 teams working towards this goal: </p>
+        <ul class="team-cards reveal">
+          <li class="team-card"><h3>Platform team</h3><p>Responsible for the backend of the video agent itself.</p></li>
+          <li class="team-card team-card--me"><h3>Integration team</h3><p>That’s me! Responsible for the surface and UX the video agent integrates into.</p></li>
+          <li class="team-card"><h3>Quality team</h3><p>Responsible for harnessing and directing the quality of the agent’s output.</p></li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2 class="reveal">Identifying the opportunity</h2>
+        <p>During the early stages of the project, it was my team’s responsibility to identify the opportunity across M365 for this video agent. Which app should it be implemented in? What users should we be chasing? What scenario should this video agent excel at?</p>
+        <p>To answer these questions, I prepared a FigJam workshop to bring together relevant stakeholders. I brought together screenshots of our current integrations, screenshots of opportunities around M365 for potential integrations, our list of user jobs, feedback we received from a prior iteration of a video “agent” (it wasn’t quite agentic), and usage data for various M365 apps. Together as a group we ran through exercises to brainstorm which user scenario held the highest potential value for our video agent and which integration app held the highest opportunity for us.</p>
+        <div class="shot-rail reveal">
+          <div class="rail-wrap">
+            <div class="rail-fade left" hidden></div>
+            <div class="rail-fade right"></div>
+            <button class="rail-nav prev" type="button" aria-label="Scroll screenshots left" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button class="rail-nav next" type="button" aria-label="Scroll screenshots right">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+            <div class="rail">
+            <figure class="shot"><div class="shot-media"><img src="assets/agent/figjam-1.webp" alt="FigJam board: library of our current video integrations, annotated with sticky notes" loading="lazy"></div><figcaption>Library of our current integrations</figcaption></figure>
+            <figure class="shot"><div class="shot-media"><img src="assets/agent/figjam-2.webp" alt="FigJam board: new surfaces across M365 considered for integration" loading="lazy"></div><figcaption>New opportunities across Microsoft for integrations</figcaption></figure>
+            <figure class="shot"><div class="shot-media"><img src="assets/agent/figjam-3-trimmed.jpg" alt="FigJam board: consumption user jobs clustered by theme" loading="lazy"></div><figcaption>Clustering consumption user jobs to find high value scenarios</figcaption></figure>
+          </div>
+        </div>
+        </div>
+        <p>We landed on the following:</p>
+        <ul class="team-rows reveal">
+          <li class="team-row"><h3>Consumption explainer scenario</h3><div class="team-row-body"><p>Users watch content as video, as an alternative or complement to text, rather than creating video to share. We chose it for its high potential for delight and growth.</p></div></li>
+          <li class="team-row"><h3>Non video creators</h3><div class="team-row-body"><p>People trying to understand a topic who watch video daily on Instagram or TikTok, but may not know video is an option for work content (there are many users like this!).</p></div></li>
+          <li class="team-row"><h3>Copilot app</h3><div class="team-row-body"><p>Copilot app was up and coming and aligned with strategic priorities, and 32% of its prompts were classified as “Understand,” giving us a large user pool to grow with.</p></div></li>
+        </ul>
+        <p>With that, all three teams moved forward aligned on the consumption explainer scenario.</p>
+      </section>
+
+      <section class="section">
+        <h2 class="reveal">Combating latency, the biggest challenge for consumption scenarios</h2>
+        <p>My team moved forward to combat our largest challenge with the consumption scenario: latency. With consumption scenarios, users wouldn’t sit and wait for an optional video to generate when the text response was already delivered to them. The video needed to be ready to bring immediate value.</p>
+        <p>I brainstormed many potential entry points and sent them out for feedback to understand which decreased feelings of latency the most. I vibe-coded the ideas with the most potential with the hopes of testing them with users. We had a study drawn up, but never got to begin testing.</p>
+        <div class="shot-rail reveal">
+        <div class="rail-wrap">
+          <div class="rail-fade left" hidden></div>
+          <div class="rail-fade right"></div>
+          <button class="rail-nav prev" type="button" aria-label="Scroll videos left" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="rail-nav next" type="button" aria-label="Scroll videos right">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+          <div class="rail">
+            <figure class="shot"><div class="shot-media"><video data-autoplay muted loop playsinline controls preload="none" width="1920" height="1080" poster="assets/posters/agent-vibe-coding-1.jpg" src="assets/agent/vibe-coding-1.mp4"></video></div><figcaption>Suggested user action</figcaption></figure>
+            <figure class="shot"><div class="shot-media"><video data-autoplay muted loop playsinline controls preload="none" width="1920" height="1080" poster="assets/posters/agent-vibe-coding-2.jpg" src="assets/agent/vibe-coding-2.mp4"></video></div><figcaption>In-time playback</figcaption></figure>
+            <figure class="shot"><div class="shot-media"><video data-autoplay muted loop playsinline controls preload="none" width="1920" height="1080" poster="assets/posters/agent-vibe-coding-3.jpg" src="assets/agent/vibe-coding-3.mp4"></video></div><figcaption>Inline generation</figcaption></figure>
+            <figure class="shot"><div class="shot-media"><video data-autoplay muted loop playsinline controls preload="none" width="1920" height="1080" poster="assets/posters/agent-vibe-coding-4.jpg" src="assets/agent/vibe-coding-4.mp4"></video></div><figcaption>Email notification when generation completes</figcaption></figure>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="reveal">The first shift in plans</h2>
+        <p>While I was full-steam ahead on the integration UX for our consumption explainer scenario, the platform pod was improving the video agent itself. This team realized that the latency and generation time would be drastically longer than initially expected and communicated that risk to leadership.</p>
+        <blockquote class="pullquote pullquote--plain reveal">
+          <p>Leadership, who knew that latency was already a challenge for consumption scenarios, decided to move away from the user base we originally defined to a new one: explicit creation users. Because these users have a specific intent to create, they would be more willing to tolerate additional latency (although also more likely to require a higher quality output). </p>
+        </blockquote>
+        <p>With that, our scenario shifted to explicit creation explainer scenarios. </p>
+      </section>
+
+      <section class="section">
+        <h2 class="reveal">Research</h2>
+        <p>While the quality team conducted research on what quality meant to our new users and how to best harness the agent to meet that quality, my team was able to leverage existing research from WXP (Word, Excel, and PowerPoint) creation agents. While our agent output was different, how users thought about user choice, control, collaboration, transparency, and editing remained largely the same regardless of the medium. </p>
+        <p>I made a research bank to refer back to, and my three main takeaways from this research were:</p>
+        <ul class="team-rows reveal">
+          <li class="team-row"><h3>Users want systems that improve their work—not just follow instructions.</h3><div class="team-row-body"><p>“Users expect agents to apply expert judgment, not just execute instructions, including suggesting better structures, alternatives, and higher-quality approaches.”</p></div></li>
+          <li class="team-row"><h3>Users do not want maximum control; they want the right amount of control at the right time.</h3><div class="team-row-body"><p>“Users do not seek maximum control—they seek confident decisions, favoring fewer, clearer options over broader but ambiguous choice sets.”</p></div></li>
+          <li class="team-row"><h3>Users want to make targeted changes, and full regeneration reduces trust.</h3><div class="team-row-body"><p>“Users expect precise, controllable edits, including strictly scoped changes, editable outputs, and the ability to directly manipulate results without re-prompting.”</p></div></li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2 class="reveal">Starting designs</h2>
+        <p>I completed the first iteration of the designs and shared it out to the team via video. While things were simple, in my opinion there was still significant value unlock in prompt to video with prompt adherence, the ability to multi-turn edit, and video agent transparency.</p>
+        <figure class="fig reveal">
+          <div class="fig-media"><video data-autoplay controls muted loop playsinline preload="none" width="1920" height="1080" poster="assets/posters/agent-bizchat-designs.jpg" src="assets/agent/bizchat-designs.mp4"></video></div>
+          <figcaption>First iteration of the video agent designs in Copilot app</figcaption>
+        </figure>
+        <p>While I was happy with the first iteration, I wanted to spend more time on what I called “working artifacts” (script, storyboard, etc.) and how to best surface those for the user to optionally edit. I believed this would improve the quality of “single-shot” output and rely less on user articulation to edit the video turn after turn.</p>
+        <div class="shot-rail reveal">
+          <div class="rail-wrap">
+            <div class="rail-fade left" hidden></div>
+            <div class="rail-fade right"></div>
+            <button class="rail-nav prev" type="button" aria-label="Scroll working artifacts left" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button class="rail-nav next" type="button" aria-label="Scroll working artifacts right">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+            <div class="rail">
+              <figure class="shot"><div class="shot-media"><img src="assets/agent/script.webp" alt="Surfacing the script" width="2400" height="1500" loading="lazy"></div><figcaption>Surfacing the script</figcaption></figure>
+              <figure class="shot"><div class="shot-media"><img src="assets/agent/storyboard.webp" alt="Surfacing planned visuals" width="2400" height="1500" loading="lazy"></div><figcaption>Surfacing planned visuals</figcaption></figure>
+              <figure class="shot"><div class="shot-media"><img src="assets/agent/visual.webp" alt="Surfacing the storyboard" width="2400" height="1500" loading="lazy"></div><figcaption>Surfacing the storyboard</figcaption></figure>
+              <figure class="shot"><div class="shot-media"><img src="assets/agent/draft.webp" alt="Surfacing a 30 second preview" width="2400" height="1500" loading="lazy"></div><figcaption>Surfacing a 30 second preview</figcaption></figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="reveal">The second shift</h2>
+        <p>Before I could get a chance to explore working artifacts, the team pivoted again. After we chose Copilot app as our integration surface, a few key members of the team engaged in business planning to see the cost of our feature and what Copilot SKU it would be under.</p>
+        <blockquote class="pullquote pullquote--plain reveal">
+          <p>It had become apparent that the cost of the feature was more than expected and there simply wasn’t a SKU in Copilot app that would hold our feature.</p>
+        </blockquote>
+        <p>Business planning told us we could lower our quality and reduce our cost to fit within Copilot app, but we knew we couldn’t reduce our quality because our user group had high expectations. We had to pivot away from Copilot app as a surface, but we knew we still wanted to ship our video agent.</p>
+        <p>We turned to the Video Hub, a video homepage that houses video creation, consumption, and management, as the new home for our video agent.</p>
+        <figure class="fig fig--plain fig--hub reveal">
+          <div class="fig-media"><img src="assets/agent/video-hub-home.webp" alt="Video Hub home page" width="2400" height="1490" loading="lazy"></div>
+          <figcaption>The Video Hub, our new home for the video agent</figcaption>
+        </figure>
+      </section>
+
+      <section class="section">
+        <h2 class="reveal">A dilemma</h2>
+        <p>At this point I felt significant tension in our user story even though I understood why the decision was made. We had our explainer scenario (lower intent, no video expertise required) matched with the Video Hub (a high intent surface that only experienced video creators go to) and a pay-per-video business plan which heavily discourages new creators from trying out the product. As a user-experience designer I knew this wasn’t a cohesive story, but we had significant pressure to ship something quickly for the leaders and customers asking for it.</p>
+        <p>I disagreed and committed, but not having a clear persona to design for made the integration UX more difficult in the Video Hub.</p>
+      </section>
+
+      <section class="section">
+        <h2 class="reveal">V1 designs</h2>
+        <p>I was under immense pressure to ship the integration fast, so my first job was to unblock engineers with the first iteration of our video agent in Video Hub. Normally I like to design the best possible experience and work backwards scoping from there, but I had approximately 1.5 weeks before I was blocking engineers. With that in mind, here are the designs for our first shipping ring with select customers. </p>
+        <figure class="fig reveal">
+          <div class="fig-media"><video data-autoplay controls muted loop playsinline preload="none" width="1920" height="1080" poster="assets/posters/agent-video-hub-designs.jpg" src="assets/agent/video-hub-designs.mp4"></video></div>
+          <figcaption>Video agent designs in the Video Hub for the first shipping ring</figcaption>
+        </figure>
+        <p>I was happy with enabling the top jobs like create, edit, and share, but many aspects of the design were compromised to meet our extremely tight shipping deadline. I kept a “design risks” document so everyone (including leaders) was aware of my quality bar and the tradeoffs of pursuing speed over UX quality. Some of the biggest UX risks I identified were:</p>
+        <ul class="list">
+          <li>Having an uninspiring landing page that didn't help the user get started with their video. I wish the landing page inspired users and helped them form a quality prompt.</li>
+          <li>Surfacing no working artifacts. The 30 minute latency felt incredibly painful and the creation process was not as collaborative as the UX research encouraged us to reach for.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2 class="reveal">Ideal designs</h2>
+        <p>While the engineers were unblocked to implement, I worked on my ideal version of the designs. I had to timebox the explorations to ~1 week on recommendation from my manager, but this is what I was able to explore. </p>
+        <figure class="fig fig--full reveal" id="final-designs">
+          <div class="fig-media"><video data-autoplay controls muted loop playsinline preload="none" width="1920" height="1080" poster="assets/posters/agent-ga-vision.jpg" src="assets/agent/ga-vision.mp4"></video></div>
+          <figcaption>My ideal version of the video agent designs in the Video Hub</figcaption>
+        </figure>
+        <p>I’m happy with these designs because they improve upon the previous iteration by offering a starting point and inspiration for users on the landing page, a more organized and helpful chain of thought (an agent's processing language and transparency), and a notification system so that users can be alerted when generation completes and continue with their flow of work. If I were to spend more time on the designs, I’d focus on surfacing working artifacts.</p>
+      </section>
+
+      <section class="section">
+        <h2 class="reveal">Implementation</h2>
+        <p>As we progressed through each ring we held frequent bug bashes and I was responsible for compiling feedback, suggesting design recommendations, and following up with those who filed the feedback with the proposed solution.</p>
+      </section>
+
+      <section class="section">
+        <h2 class="reveal">Impact</h2>
+        <p>The impact remains to be seen (as of November 2026), but we’ve received very encouraging early signals from both customers and leaders. We expect to be fully shipped soon.</p>
+      </section>
+
+      <section class="section">
+        <h2 class="reveal">Reflections</h2>
+        <ul class="list">
+          <li>The two large shifts in this project were difficult but have prepared me for the speed of work in this new age of AI.</li>
+          <li>This project challenged my ability to work quickly but still design the ideal experience and advocate for feature quality.</li>
+          <li>I have many more ideas in my head of how to improve the experience, but I’m very proud to ship the video agent publicly after cycling internally on it since January.</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <section class="other" aria-labelledby="other-work">
+    <h2 id="other-work">Other work</h2>
+    <div class="rail-wrap">
+      <div class="rail" data-project-cards data-limit="2"></div>
+    </div>
+  </section>
+
+  <script src="js/projects.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

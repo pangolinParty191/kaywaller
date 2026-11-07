@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Copilot Clips · Kay Waller</title>
+  <meta name="description" content="A product that aims to disrupt the future of video consumption in enterprise spaces.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Kay Waller">
+  <meta property="og:title" content="Copilot Clips · Kay Waller">
+  <meta property="og:description" content="A product that aims to disrupt the future of video consumption in enterprise spaces.">
+  <meta property="og:image" content="assets/share/clips.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@200;300;400;500;600&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="--tint:#f3c4a5; --tint-deep:#eda886; --accent:#e2622a;">
+  <a class="skip" href="#content">Skip to content</a>
+
+  <header class="phead" data-text="left" style="--text-w:36%">
+    <nav class="topnav" aria-label="Project">
+      <a href="index.html" aria-label="Back to home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h4.5v-5.5h4V20h4.5V9.5"/></svg></a>
+      <a href="templates.html" aria-label="Next project: Video templates"><span>Next project</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </nav>
+    <div class="hero-banner" style="--hero-pos:72% 50%"><img fetchpriority="high" src="assets/clips/hero-again.jpg" width="2400" height="1071" alt="Copilot Clips hero image"></div>
+    <div class="hero-text">
+      <h1>Copilot Clips</h1>
+      <p class="hero-sub">I led feed design for Copilot Clips, an experimental AI video product, running rapid hypothesis tests with vibe-coded prototypes to find product-market fit and producing weekly feedback digests that guided the team what to build next.</p>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="overview">
+      <p class="eyebrow">The challenge</p>
+      <p class="challenge">How might we validate hypotheses to find product-market fit for an experimental video-first AI product inside Microsoft called Copilot Clips?</p>
+      <div class="meta">
+        <div><p class="eyebrow">My role</p><p>Lead designer for the Feed squad, which owned the experience our clips live in. I tested risky assumptions through rapid prototyping and published weekly feedback reports.</p></div>
+        <div><p class="eyebrow">Outcome</p><p>Team learnings about which scenarios AI-generated video brings the most value for and how to vibe-code.</p></div>
+        <div><p class="eyebrow">Team</p><p>2 other designers, 10 engineers, 1 PM, and 1 EM</p></div>
+        <div><p class="eyebrow">Timeframe</p><p>February 2025 - February 2026</p></div>
+      </div>
+    </section>
+
+    <div class="story">
+      <section class="section">
+        <h2 class="reveal">The concept</h2>
+        <p>Working on an unvalidated experimental product was a shift from our usual workflow. With Copilot Clips, we had an idea but needed to know if it was viable for a specific slice of enterprise users. The concept was enterprise content like missed meetings, messages, and emails shown to the user via AI-generated video in a consumer-style feed format where users could scroll through and catch up on their day. Leadership had encouraged this concept to attempt to fulfill our mission of making video a commonplace work communication method.</p>
+        <figure class="fig reveal">
+          <div class="fig-media"><video data-autoplay controls muted loop playsinline preload="none" width="1920" height="1080" poster="assets/posters/clips-concept.jpg" src="assets/clips/concept.mp4"></video></div>
+          <figcaption>v0 of the Clips concept</figcaption>
+        </figure>
+      </section>
+
+      <section class="section">
+        <h2 class="reveal">Finding product-market fit</h2>
+        <p>Using the assumptions/hypotheses framework, we defined what we believed (e.g., “a consumer-style feed will resonate with enterprise users”) and tested those hypotheses using the fastest methods available—vibe-coding, surveys, interviews, lightweight prototypes, and telemetry. This focus on rapid, scrappy weekly experiments helped us derisk our highest-risk assumptions and move through internal Microsoft rings as the product’s shape became clearer.</p>
+        <figure class="fig reveal">
+          <div class="fig-media"><video data-autoplay controls muted loop playsinline preload="none" width="2286" height="1080" poster="assets/posters/clips-validation.jpg" src="assets/clips/validation.mp4"></video></div>
+          <figcaption>Representation of hypotheses validation</figcaption>
+        </figure>
+      </section>
+
+      <section class="section">
+        <h2 class="reveal">Squad roles</h2>
+        <p>Although discipline roles were fluid, in general PMs focused on customer interviews about the general product shape and designers focused on specific feature hypotheses and how to validate them with a prototype. We were in constant communication with each other, as the findings from PM interviews would inform which hypotheses moved up or down in priority order to validate. Engineers focused on larger backend hypotheses like performance, storage, and security.</p>
+        <p>In my role as lead designer, I worked with PM to identify and prioritize hypotheses to test and the plans to validate them using one of two methods: </p>
+        <ul class="team-cards team-cards--pair reveal">
+          <li class="team-card"><h3>By code</h3><p>For hypotheses that needed context of the product, engineering implemented the designs, then I created testing plans to define when validation was met.</p></li>
+          <li class="team-card"><h3>By design</h3><p>For hypotheses that could be validated outside of the product, I created separate user studies that contained a prototype and an accompanying research survey or interview.</p></li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2 class="reveal">Validating via a vibe-coded prototype</h2>
+        <p>For example, I set out to validate 5 hypotheses related to the type of content that performed best in our form factor through a “vibe-coded” AI prototype and an accompanying research survey. The vibe-coded prototype surfaced the design being tested, had a link to a follow-up survey, and collected real-time telemetry (video watch time, thumbs up, and thumbs down) from participants that it sent to a database. After analyzing the 266 sentiment signals and 35 survey responses I was able to prove or disprove 5 hypotheses.</p>
+        <figure class="fig reveal">
+          <div class="fig-media"><video data-autoplay controls muted loop playsinline preload="none" width="1834" height="1080" poster="assets/posters/clips-vercel.jpg" src="assets/clips/vercel.mp4"></video></div>
+          <figcaption>Vibe-coded feed prototype to test the performance of different content types</figcaption>
+        </figure>
+        <p>Although the vibe-coded prototype was buggy and took a considerable amount of time, validating these hypotheses on the design side allowed engineers to spend their time exploring other high-risk areas. This prototype was used as an example by leadership to show what designers could do using AI tools, as I was one of the first in the team to vibe-code something that had a practical product use.</p>
+        <figure class="fig reveal">
+          <div class="fig-media"><video data-autoplay controls muted loop playsinline preload="none" width="1920" height="1080" poster="assets/posters/clips-vercel-data.jpg" src="assets/clips/vercel-data.mp4"></video></div>
+          <figcaption>Live data collected from the prototype</figcaption>
+        </figure>
+      </section>
+
+      <section class="section">
+        <h2 class="reveal">Defining our customers</h2>
+        <p>Eventually we had validated or invalidated enough hypotheses that the product shape and the customer base were becoming a bit clearer. Who was resonating with our product? Who wasn’t and why? What was the customer slice we wanted to chase? Personas were then defined based on the results of the prototypes. I contributed to the workshops that defined the persona, but was not the sole person responsible.</p>
+        <p>Product (PM and Design) aligned on a persona that was called Synthesizers, a fast-moving group of customers that need quick overviews to make confident decisions. Going forward, each of the hypotheses would now be validated or invalidated by members of that specific customer base.</p>
+        <figure class="fig reveal">
+          <div class="fig-media"><img src="assets/clips/persona.webp" alt="Synthesizer persona slide" width="2400" height="1350" loading="lazy"></div>
+          <figcaption>Synthesizer persona (I did not make this graphic)</figcaption>
+        </figure>
+      </section>
+
+      <section class="section">
+        <h2 class="reveal">The designs</h2>
+        <p>While the design of the engineered product was quite basic, the group of designers and I were exploring the v2 of the landing page. Our goals with the redesign were to make the feature feel more consumer and foster user confidence that the output wasn’t AI slop and instead an intelligent and informed way to catch up. </p>
+        <div class="shot-rail reveal">
+          <div class="rail-wrap">
+            <div class="rail-fade left" hidden></div>
+            <div class="rail-fade right"></div>
+            <button class="rail-nav prev" type="button" aria-label="Scroll feed concepts left" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button class="rail-nav next" type="button" aria-label="Scroll feed concepts right">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+            <div class="rail">
+              <figure class="shot"><div class="shot-media"><img src="assets/clips/feed-1.webp" alt="Feed landing concept 1" width="2400" height="1396" loading="lazy"></div><figcaption>My concept</figcaption></figure>
+              <figure class="shot"><div class="shot-media"><img src="assets/clips/feed-2.webp" alt="Feed landing concept 2" width="2400" height="1350" loading="lazy"></div><figcaption>Another designer’s concept</figcaption></figure>
+              <figure class="shot"><div class="shot-media"><img src="assets/clips/feed-3.webp" alt="Feed landing concept 3" width="2400" height="1350" loading="lazy"></div><figcaption>Another designer’s concept</figcaption></figure>
+              <figure class="shot"><div class="shot-media"><img src="assets/clips/feed-5.webp" alt="Feed landing concept 4" width="2400" height="1350" loading="lazy"></div><figcaption>Another designer’s concept</figcaption></figure>
+            </div>
+          </div>
+        </div>
+        <p>While we never got to realize these UI improvements fully as priorities shifted to the quality of the AI-generated videos themselves, I was able to get some minor player UI improvements that I designed implemented for both the web and mobile players. </p>
+        <figure class="fig fig--plain reveal">
+          <div class="fig-media"><img src="assets/clips/player.webp" alt="Mobile and web video player UI" width="1638" height="990" loading="lazy"></div>
+          <figcaption>Video player UI that I designed</figcaption>
+        </figure>
+      </section>
+
+      <section class="section">
+        <h2 class="reveal">Measuring progress</h2>
+        <p>After implementing the designs we wanted to ensure we could still measure progress towards our goal of achieving product-market fit. As the lead designer for the team owning the broader experience our content lived within, I was also responsible for assessing overall product success and keeping a holistic view of the end-to-end experience. That meant:</p>
+        <ul class="list list--figs">
+          <li>
+            <p>Enabling both qualitative and quantitative feedback mechanisms within the product to capture user sentiment.</p>
+            <figure class="fig">
+              <div class="fig-media"><video data-autoplay controls muted loop playsinline preload="none" width="1644" height="1080" poster="assets/posters/clips-feedback.jpg" src="assets/clips/feedback.mp4"></video></div>
+              <figcaption>Feedback mechanism in the product</figcaption>
+            </figure>
+          </li>
+          <li>
+            <p>Encouraging internal self-hosting by setting up weekly testing challenges and leaderboards.</p>
+            <figure class="fig">
+              <div class="fig-media"><video data-autoplay controls muted loop playsinline preload="none" width="1688" height="1080" poster="assets/posters/clips-ocv-dashboard.jpg" src="assets/clips/ocv-dashboard.mp4"></video></div>
+              <figcaption>Internal dashboard with self-hosting leaderboards</figcaption>
+            </figure>
+          </li>
+          <li>
+            <p>Analyzing feedback across multiple places (surveys, customer input portal) and correlating it with recent product changes to highlight recent successes, improvements, and ideas. I published weekly feedback digests to bring this feedback to the team.</p>
+            <figure class="fig">
+              <div class="fig-media"><video data-autoplay controls muted loop playsinline preload="none" width="1920" height="1080" poster="assets/posters/clips-loop-analysis.jpg" src="assets/clips/loop-analysis.mp4"></video></div>
+              <figcaption>Example of the weekly digests used to communicate successes, improvements, and ideas to various teams</figcaption>
+            </figure>
+          </li>
+        </ul>
+        <p>Although I was moved off the project in December 2025 to work on other high priority items, gradually Clips progressed through internal rings and was shown to a select group of customers at the end of April. However, because of model and cost constraints, the team ultimately pivoted away from Copilot Clips and the feature was never shipped.</p>
+      </section>
+
+      <section class="section">
+        <h2 class="reveal">Reflections</h2>
+        <ul class="list">
+          <li>This was my first project where I used AI to make design prototypes. It's empowering that designers can create lifelike designs with ease!</li>
+          <li>I have a better understanding of when to prototype with Figma vs vibe-code. Vibe-code = interaction design, data hookups, responsive pages. Figma = UI details, fewer interactions, and quick thinking.</li>
+          <li>Not all the prototypes were successful with AI. Time-box explorations before switching back to traditional methods.</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <section class="other" aria-labelledby="other-work">
+    <h2 id="other-work">Other work</h2>
+    <div class="rail-wrap">
+      <div class="rail" data-project-cards data-limit="2"></div>
+    </div>
+  </section>
+
+  <script src="js/projects.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

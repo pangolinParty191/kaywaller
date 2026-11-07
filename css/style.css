@@ -1,0 +1,673 @@
+/* ==========================================================================
+   Kay Waller — portfolio
+   Type: Playfair Display (display) + Karla (text), matching the original site.
+   Each project page sets --tint / --tint-deep / --accent on <body>.
+   ========================================================================== */
+
+:root {
+  --bg: #f7f7f7;
+  --surface: #fafafa;
+  --ink: #282828;
+  --ink-soft: #4a4a4a;
+  --muted: #6b6b6b;
+  --line: #d9d9d9;
+  --accent: #e2622a;
+  --tint: #f3c4a5;
+  --tint-deep: #eab08c;
+  --serif: "Bricolage Grotesque", var(--sans); /* display face for titles, headings, the name and card titles; Karla stays for body text */
+  --sans: "Karla", system-ui, -apple-system, sans-serif;
+  --gutter: clamp(16px, 4.8vw, 96px);
+  --col: 680px;
+  --wide: 1240px;
+  --radius: 12px;
+  --shadow: 0 24px 48px -20px rgba(40, 30, 20, .28), 0 4px 14px rgba(40, 30, 20, .06);
+  --ease: cubic-bezier(.22, .8, .24, 1);
+  /* Project page spacing, sized to the 18px body. Every gap on a project page uses one of these. */
+  --sp-caption: 12px;  /* image or video -> its caption */
+  --sp-head: 16px;     /* heading -> the text under it */
+  --sp-para: 18px;     /* paragraph -> paragraph (1em) */
+  --sp-block: 36px;    /* text <-> figure, carousel, card row or quote */
+  --sp-section: 80px;  /* end of one section -> next section's heading */
+  /* shared header geometry, so buttons sit at the same height on the landing and project pages */
+  --head-top: clamp(24px, 4.4vw, 56px);
+  --head-row: calc(clamp(22px, 2.2vw, 28px) * 1.68); /* one line of the Kay Waller wordmark */
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.68;
+  letter-spacing: .012em;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img, video { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.015em; margin: 0; }
+p { margin: 0 0 var(--sp-para); }
+strong { font-weight: 500; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+.skip { position: absolute; left: -999px; top: 8px; background: var(--ink); color: #fff; padding: 8px 14px; border-radius: 6px; z-index: 50; }
+.skip:focus { left: 8px; }
+
+/* ---------- Site header (landing) ---------- */
+.site-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: var(--head-top) var(--gutter) 0;
+}
+.wordmark { font-family: var(--serif); font-size: clamp(24px, 2.4vw, 32px); font-weight: 500; text-decoration: none; letter-spacing: -.01em; }
+.header-links { display: flex; align-items: center; gap: clamp(16px, 2.4vw, 40px); }
+.header-links a { text-decoration: none; font-weight: 400; font-size: 18px; }
+.header-links a:not(.pill):hover { text-decoration: underline; text-underline-offset: 5px; }
+.pill {
+  display: inline-block; padding: 9px 26px; border: 1.5px solid var(--ink); border-radius: 999px;
+  transition: background .25s var(--ease), color .25s var(--ease);
+}
+.pill:hover { background: var(--ink); color: var(--bg); }
+
+.toast {
+  position: fixed; left: 50%; bottom: 32px; z-index: 60;
+  padding: 10px 20px; border-radius: 999px;
+  background: var(--ink); color: var(--bg); font-size: 15px; font-weight: 400; white-space: nowrap;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .18);
+  opacity: 0; transform: translate(-50%, 12px); pointer-events: none;
+  transition: opacity .3s var(--ease), transform .3s var(--ease);
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- Landing card rail ---------- */
+.landing { padding: clamp(48px, 9vh, 120px) 0 clamp(48px, 8vh, 96px); }
+.rail-wrap { position: relative; }
+.rail {
+  --card: clamp(260px, calc((100vw - 2 * var(--gutter) - 3 * 40px) / 4), 440px);
+  display: grid; grid-auto-flow: column; grid-auto-columns: var(--card);
+  gap: clamp(20px, 2.4vw, 40px);
+  overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter);
+  padding: 24px var(--gutter) 40px;
+  scrollbar-width: none;
+}
+.rail::-webkit-scrollbar { display: none; }
+.rail > * { scroll-snap-align: start; }
+/* Snapping fights eased wheel scrolling, so keep it for touch only */
+@media (pointer: fine) { .rail { scroll-snap-type: none; } }
+.rail-nav {
+  position: absolute; top: calc(24px + var(--card-h, 0px) / 2); translate: 0 -50%;
+  width: 52px; height: 52px; border-radius: 50%; border: 0; cursor: pointer;
+  display: grid; place-items: center;
+  background: var(--bg); color: var(--ink);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .16), 0 2px 6px rgba(0, 0, 0, .08);
+  transition: opacity .3s var(--ease), transform .25s var(--ease);
+  z-index: 3;
+}
+.rail-nav:hover { transform: scale(1.06); }
+.rail-nav[disabled] { opacity: 0; pointer-events: none; }
+.rail-nav.prev { left: calc(var(--gutter) / 2 - 10px); }
+.rail-nav.next { right: calc(var(--gutter) / 2 - 10px); }
+.rail-nav svg { width: 22px; height: 22px; }
+.rail-fade { position: absolute; top: 0; bottom: 0; width: var(--gutter); pointer-events: none; z-index: 2; transition: opacity .3s; }
+.rail-fade.left { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
+.rail-fade.right { right: 0; background: linear-gradient(270deg, var(--bg), transparent); }
+.rail-fade[hidden] { display: block; opacity: 0; }
+
+.card { display: block; text-decoration: none; color: inherit; }
+.card-media {
+  position: relative; aspect-ratio: 5 / 7; border-radius: 6px; overflow: hidden;
+  background: #e6e6e6; box-shadow: 0 18px 40px -22px rgba(0, 0, 0, .35);
+}
+.card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease), filter .4s var(--ease); }
+/* The hover blurs the image itself (not a backdrop-filter, which leaves a sharp sliver at the card's edges);
+   the image is scaled up enough that the blur's faded rim stays outside the card's clipped corners. */
+.card-hover {
+  position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 10px;
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
+  opacity: 0; transition: opacity .35s var(--ease);
+  font-size: 17px; font-weight: 400;
+}
+.card-hover svg { width: 56px; height: 56px; transform: translateX(-6px); transition: transform .45s var(--ease); }
+a.card .card-media:hover .card-hover, a.card:focus-visible .card-hover { opacity: 1; }
+a.card .card-media:hover .card-hover svg, a.card:focus-visible .card-hover svg { transform: none; }
+a.card .card-media:hover img, a.card:focus-visible .card-media img { transform: scale(1.1); filter: blur(6px) saturate(.6); }
+.card--me .card-media { background: #dadada; box-shadow: none; }
+.card-title { margin: 22px 0 2px; font-family: var(--sans); font-weight: 500; font-size: 18px; letter-spacing: .02em; }
+.card-sub { margin: 0; color: var(--ink-soft); font-size: 17px; line-height: 1.6; }
+
+/* Landing page: fits one screen, no vertical scroll, cards sized to the height left under the header */
+body.home { height: 100vh; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+.home .site-header { flex: none; }
+/* Three levels: name 28 / titles 18 / everything else 15 */
+:is(.home, .page-about) .wordmark { font-size: clamp(22px, 2.2vw, 28px); font-weight: 500; }
+:is(.home, .page-about) .header-links a { font-size: 15px; }
+:is(.home, .page-about) .pill { padding: 6px 18px; }
+/* Resume: a ghost pill the same size as Contact that fills light gray on hover */
+:is(.home, .page-about) .header-links { gap: clamp(4px, .8vw, 12px); }
+:is(.home, .page-about) .header-links a:not(.pill) {
+  padding: 6px 18px; border: 1.5px solid transparent; border-radius: 999px;
+  transition: background .25s var(--ease);
+}
+:is(.home, .page-about) .header-links a:not(.pill):hover { text-decoration: none; background: #edeff2; }
+/* Even spacing: at rest, a ghost pill's visible edge is its text, but Contact's is its outline. Pulling the ghost
+   pills together by half their padding and pushing Contact out by the same makes every visible gap identical. */
+:is(.home, .page-about) .header-links { --hl-pad: 18px; }
+:is(.home, .page-about) .header-links a:not(.pill) + a:not(.pill) { margin-left: calc(var(--hl-pad) / -2); }
+:is(.home, .page-about) .header-links .pill { margin-left: calc(var(--hl-pad) / 2); }
+/* the page you're on keeps its light gray fill */
+/* the page you're on: no fill, just a short black underline with rounded ends, spanning the word */
+:is(.home, .page-about) .header-links a[aria-current="page"] { position: relative; background: none; cursor: default; }
+:is(.home, .page-about) .header-links a[aria-current="page"]::after {
+  content: ""; position: absolute; left: var(--hl-pad); right: var(--hl-pad); bottom: 2px;
+  height: 2px; border-radius: 999px; background: var(--ink);
+}
+
+/* About page: laid out on the landing page's grid. The page is one screen tall like the landing page, and the row
+   uses the same card size, gap, padding and vertical centring, so the two photos sit exactly where the landing page's
+   first two cards are. The bio spans two card widths and ends on the header's right edge. */
+body.page-about { height: 100vh; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+.page-about .site-header { flex: none; }
+.about {
+  flex: 1; min-height: 0; overflow-y: auto; container-type: size;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.about-row {
+  /* same --card/--gap as .landing .rail; --label-h matches the landing cards' title + subtitle under the image */
+  --card: calc(.98 * min(clamp(200px, calc((100vw - 2 * var(--gutter) - 3 * 40px) / 4), 440px), (100cqh - 210px) * 5 / 7));
+  --gap: clamp(20px, 2.4vw, 40px); --label-h: 78px;
+  display: grid; grid-template-columns: var(--card) var(--card) minmax(0, 1fr); column-gap: var(--gap); align-items: start;
+  padding: 20px var(--gutter) calc(28px + var(--label-h));
+}
+.about-photo { aspect-ratio: 5 / 7; border-radius: 6px; overflow: hidden; background: #dadada; box-shadow: 0 14px 32px -20px rgba(0, 0, 0, .26); }
+.about-photo img { width: 100%; height: 100%; object-fit: cover; }
+.about-photo--empty { box-shadow: none; }
+/* load-in: the same deal as the landing cards. The photos drop as a deck on the first slot, the second is dealt out
+   to its place, then the bio fades up. Uses the landing page's keyframes and timings. */
+.about-photo {
+  position: relative; z-index: calc(10 - var(--i, 0));
+  animation:
+    deck-drop .15s cubic-bezier(.2, .9, .3, 1.2) both,
+    deal .35s cubic-bezier(.34, 1.45, .55, 1) calc(.08s + var(--i, 0) * .035s) both;
+}
+.about-photo:nth-child(1) { --i: 0; --r: -3deg; }
+.about-photo:nth-child(2) { --i: 1; --r: 5deg; }
+.about-text { animation: text-up .3s var(--ease) .29s both; }
+.about-text { justify-self: end; width: min(100%, 2 * var(--card) + var(--gap)); }
+/* set exactly like the "Kay Waller" wordmark in the header */
+.about-text h1 { font-family: var(--serif); font-size: clamp(22px, 2.2vw, 28px); font-weight: 500; letter-spacing: -.01em; line-height: 1.25; margin-bottom: var(--sp-head); }
+.about-text a { text-underline-offset: 3px; }
+.landing {
+  flex: 1; min-height: 0; padding: 0;
+  display: flex; flex-direction: column; justify-content: center;
+  container-type: size;
+}
+.landing .rail {
+  /* 210px = rail padding + the gap above the description + up to five lines of it (descriptions are never cut off) */
+  --card: calc(.98 * min(clamp(200px, calc((100vw - 2 * var(--gutter) - 3 * 40px) / 4), 440px), (100cqh - 210px) * 5 / 7));
+  padding-block: 20px 28px;
+}
+.landing .rail-nav { top: calc(20px + var(--card-h, 0px) / 2); }
+
+/* Load-in: the cards drop onto the first slot as a messy deck, then get dealt out one by one.
+   Each card starts --i slots to its left (stacked on the About me card) with its own tilt. */
+.landing .rail { --gap: clamp(20px, 2.4vw, 40px); column-gap: var(--gap); position: relative; z-index: 1; }
+.landing .card {
+  position: relative; z-index: calc(10 - var(--i, 0));
+  animation:
+    deck-drop .15s cubic-bezier(.2, .9, .3, 1.2) both,
+    deal .35s cubic-bezier(.34, 1.45, .55, 1) calc(.08s + var(--i, 0) * .035s) both;
+}
+/* no hover states while the cards are still flying (main.js removes this when the deal finishes) */
+.landing .rail.dealing .card { pointer-events: none; }
+.landing .card:nth-child(1) { --i: 0; --r: -3deg; }
+.landing .card:nth-child(2) { --i: 1; --r: 5deg; }
+.landing .card:nth-child(3) { --i: 2; --r: -7deg; }
+.landing .card:nth-child(4) { --i: 3; --r: 4deg; }
+.landing .card:nth-child(5) { --i: 4; --r: -5deg; }
+.landing .card-title, .landing .card-sub { animation: text-up .3s var(--ease) calc(.25s + var(--i, 0) * .035s) both; }
+.landing .card-sub { animation-delay: calc(.29s + var(--i, 0) * .035s); }
+.landing .rail-nav.next:not([disabled]) { animation: nudge .6s var(--ease) .55s both; }
+@keyframes deck-drop {
+  from { opacity: 0; scale: 1.06; }
+  to { opacity: 1; scale: 1; }
+}
+@keyframes deal {
+  from { translate: calc(-1 * var(--i, 0) * (var(--card) + var(--gap))) 0; rotate: var(--r, 0deg); }
+  to { translate: 0 0; rotate: 0deg; }
+}
+@keyframes text-up {
+  from { opacity: 0; translate: 0 8px; }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes nudge { /* the next arrow pops in, then gives a little "there's more" bump */
+  0% { opacity: 0; scale: .6; }
+  35% { opacity: 1; scale: 1; translate: 0 -50%; }
+  55% { translate: 6px -50%; }
+  75% { translate: 0 -50%; }
+  85% { translate: 3px -50%; }
+  100% { translate: 0 -50%; }
+}
+/* Project cards look and behave the same on the landing page and in each project's "Other work" */
+:is(.landing, .other) .card-media { box-shadow: 0 14px 32px -20px rgba(0, 0, 0, .26); }
+.landing .card--me .card-media { box-shadow: none; }
+:is(.landing, .other) .card-hover { font-size: 15px; font-weight: 400; gap: 6px; }
+:is(.landing, .other) .card-hover svg { width: 28px; height: 28px; transform: translateX(-3px); }
+/* a soft bob while hovered: the label trails the arrow slightly so they move like one springy object */
+:is(.landing, .other) .card-hover-label { display: block; }
+:is(.landing, .other) a.card .card-media:hover .card-hover svg,
+:is(.landing, .other) a.card:focus-visible .card-hover svg { animation: hover-bob 1.6s ease-in-out .35s infinite; }
+:is(.landing, .other) a.card .card-media:hover .card-hover-label,
+:is(.landing, .other) a.card:focus-visible .card-hover-label { animation: hover-bob 1.6s ease-in-out .42s infinite; }
+@keyframes hover-bob {
+  0%, 45%, 100% { translate: 0 0; }
+  15% { translate: 0 -3px; }
+  28% { translate: 0 0; }
+  36% { translate: 0 -1px; }
+}
+:is(.landing, .other) .card-hover circle { fill: var(--ink); stroke: var(--ink); }
+:is(.landing, .other) .card-hover path { stroke: var(--bg); }
+:is(.landing, .other) .card-title { margin: 24px 0 6px; font-size: 21px; line-height: 1.25; letter-spacing: 0; }
+:is(.landing, .other) .card-sub { font-size: 18px; font-weight: 300; line-height: 1.55; } /* same size and weight as the project pages' body text */
+:is(.landing, .other) .card-sub { margin-top: 20px; font-family: var(--serif); font-weight: 500; letter-spacing: -.01em; } /* card titles in the display face */
+:is(.landing, .other) .card-note { margin: 2px 0 0; color: var(--ink-soft); font-size: 18px; line-height: 1.55; } /* plain body text under the bold label */ /* the landing cards have no titles: the description sits right under the image */
+/* ---------- Project hero ---------- */
+.topnav {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: clamp(20px, 3.6vw, 44px) var(--gutter) 0; font-size: 15px; font-weight: 400;
+  position: relative; z-index: 2;
+}
+.topnav a { text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+.topnav a:hover span { text-decoration: underline; text-underline-offset: 5px; }
+.topnav svg { width: 18px; height: 18px; flex: none; transition: transform .3s var(--ease); }
+.topnav a:first-child:hover svg { transform: translateY(-2px); }
+.topnav a:last-child:hover svg { transform: translateX(3px); }
+
+/* Hero runs edge to edge from the very top; the project nav floats over it on frosted pills */
+.phead { position: relative; }
+.phead .topnav {
+  position: absolute; top: 0; left: 0; right: 0;
+  padding-top: var(--head-top); height: calc(var(--head-top) + var(--head-row));
+}
+.phead .topnav a {
+  padding: 6px 13px; border-radius: 999px;
+  background: color-mix(in srgb, var(--bg) 20%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2);
+  transition: background .25s var(--ease);
+}
+.phead .topnav a:hover { background: color-mix(in srgb, var(--bg) 80%, transparent); }
+.phead .topnav a:hover span { text-decoration: none; }
+/* home is icon only: a 44px circle with the same 20px icon and 12px padding as the "Back to top" button */
+.phead .topnav a:first-child { padding: 12px; border-radius: 50%; }
+.phead .topnav a:first-child svg { width: 20px; height: 20px; }
+.hero-banner {
+  width: 100%; margin: 0; border-radius: 0; overflow: hidden;
+  background: var(--tint); aspect-ratio: 3072 / 1371; max-height: 82vh;
+}
+.hero-banner img { width: 100%; height: 100%; object-fit: cover; object-position: var(--hero-pos, center); }
+/* below the image (narrower than 1200px): title, subtitle and button stacked, on the same column as the story text */
+.hero-text {
+  display: flex; flex-direction: column; gap: var(--sp-head);
+  max-width: var(--col); margin: 0 auto; padding: clamp(32px, 5vw, 56px) var(--gutter) 0; box-sizing: content-box;
+}
+.hero-text .hero-sub { margin: 0; }
+.hero-text h1 { font-size: clamp(38px, 4.3vw, 58px); line-height: 1.04; letter-spacing: -.025em; text-wrap: balance; }
+.hero-sub { font-size: clamp(18px, 1.3vw, 20px); color: var(--ink-soft); margin: 0 0 .5em; }
+
+/* Wide screens: title + subtitle sit on the empty side of the hero image.
+   Each page sets data-text="left|right" and --text-w (how much of the image is empty) on .phead. */
+@media (min-width: 1200px) {
+  /* Title + subtitle sit straight on the image: the same 420px text width on every page, against the page edge on
+     the image's empty side, and vertically centred in the image so all four heroes match. --text-w only caps the
+     width where an image's empty area is narrower than that. */
+  .phead .hero-text {
+    --pad: clamp(20px, 2vw, 32px);
+    position: absolute; z-index: 1; top: var(--text-y, 50%); translate: 0 -50%; /* --text-y: a page can centre the text on its image's subject instead */
+    width: calc(min(420px, var(--text-w, 100%) - var(--gutter)) + 2 * var(--pad));
+    max-width: none; margin: 0; box-sizing: border-box; padding: var(--pad);
+    display: flex; flex-direction: column; align-items: stretch; gap: var(--sp-head);
+  }
+  .phead[data-text="left"] .hero-text { left: calc(var(--gutter) - var(--pad)); }
+  .phead[data-text="right"] .hero-text { right: calc(var(--gutter) - var(--pad)); }
+  .phead .hero-text h1 { font-size: clamp(34px, 3.2vw, 52px); }
+  .phead .hero-sub { font-size: 17px; color: var(--ink); margin: 0; }
+}
+
+/* ---------- Overview (challenge + meta) ---------- */
+.overview { padding: var(--sp-section) max(var(--gutter), calc((100% - var(--col)) / 2)) 0; }
+.eyebrow { font-family: var(--sans); font-size: 16px; font-weight: 400; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 0 0 8px; }
+.challenge { font-family: var(--serif); font-weight: 400; letter-spacing: -.01em; font-size: clamp(24px, 2vw, 29px); line-height: 1.35; margin: 0 0 var(--sp-block); text-wrap: pretty; }
+.meta { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-block) clamp(32px, 5vw, 64px); }
+.meta p { margin: 0; }
+.meta ul { margin: 0; padding: 0; list-style: none; }
+.meta li { position: relative; padding-left: 18px; }
+/* the dash is a text character, not a drawn line: text sits on whole pixels, so every dash renders identically.
+   (A thin drawn line lands on fractional pixel rows and blurs or thickens unevenly from item to item.) */
+.meta li::before { content: "\2013"; position: absolute; left: 0; top: 0; color: var(--accent); font-weight: 400; }
+
+/* ---------- Story sections ---------- */
+.story { padding: 0 var(--gutter); container-type: inline-size; }
+.section { max-width: var(--col); margin: var(--sp-section) auto 0; }
+.section > h2 { font-size: 24px; line-height: 1.25; margin-bottom: var(--sp-head); }
+.section h3 { font-family: var(--sans); font-weight: 600; font-size: 18px; margin: 0 0 8px; }
+.section ul.list { margin: 0 0 var(--sp-para); padding: 0; list-style: none; }
+.section ul.list > li { position: relative; padding-left: 26px; margin-bottom: .5em; }
+.section ul.list > li::before { content: "\2013"; position: absolute; left: 2px; top: 0; color: var(--accent); font-weight: 400; }
+mark.todo { background: #fff1a8; color: var(--ink); padding: 1px 5px; border-radius: 4px; box-shadow: inset 0 0 0 1px #e8c94a; font-weight: 400; }
+
+/* ---------- Figures ---------- */
+.fig { margin: var(--sp-block) 0; }
+.fig-media { position: relative; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); background: #e7e7e7; }
+.fig-media img, .fig-media video { width: 100%; }
+.fig figcaption, .caption { margin-top: var(--sp-caption); text-align: center; color: var(--ink-soft); font-size: 15px; line-height: 1.5; text-wrap: balance; }
+
+/* "Jump to final designs" in the hero: the same frosted pill as the project nav buttons; the arrow nudges down on hover */
+.jump {
+  align-self: flex-start; width: fit-content; display: inline-flex; align-items: center; gap: 8px; margin: 4px 0 0 -13px; /* pull left by the padding so the words line up with the subtitle */
+  padding: 6px 13px; border-radius: 999px; font-size: 15px; font-weight: 600; text-decoration: none; color: var(--ink);
+  background: color-mix(in srgb, var(--bg) 20%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2);
+  transition: background .25s var(--ease);
+}
+.jump:hover { background: color-mix(in srgb, var(--bg) 80%, transparent); }
+.jump svg { width: 16px; height: 16px; transition: transform .3s var(--ease); }
+.jump:hover svg { transform: translateY(2px); }
+#final-designs { scroll-margin-top: var(--sp-block); }
+
+/* "Back to top": frosted pill fixed bottom-left, shown by main.js once you've scrolled down */
+.to-top {
+  /* bottom gap = the space under the "Other work" cards at the end of the page (section spacing + the rail's 4px) */
+  position: fixed; left: var(--gutter); bottom: calc(var(--sp-section) + 4px); z-index: 40;
+  display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%;
+  color: var(--ink); cursor: pointer;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .1), 0 1px 3px rgba(0, 0, 0, .06);
+  opacity: 0; translate: 0 10px; pointer-events: none;
+  transition: opacity .3s var(--ease), translate .3s var(--ease), background .25s var(--ease);
+}
+.to-top.show { opacity: 1; translate: 0 0; pointer-events: auto; }
+.to-top:hover { background: var(--bg); }
+.to-top svg { width: 20px; height: 20px; transition: transform .3s var(--ease); }
+.to-top:hover svg { transform: translateY(-2px); }
+
+/* plain: for images that bring their own transparent backdrop and shadow, so no frame around them */
+.fig--plain .fig-media { background: none; box-shadow: none; border-radius: 0; overflow: visible; }
+/* the Video Hub screenshot has ~4% transparent margin round the window: widen it so the window itself spans the column */
+.fig--hub .fig-media img { width: 109.3%; max-width: none; margin: -2.4% 0 -7.1% -4.65%; }
+
+/* cards cut out onto transparency: a soft shadow under each card shape, in place of the backdrop they were on */
+.fig--cards .fig-media img { filter: drop-shadow(0 10px 14px rgba(0, 0, 0, .09)) drop-shadow(0 2px 4px rgba(0, 0, 0, .04)); }
+
+/* as wide as the page header: edge to edge between the header's left and right margins */
+.fig--full { width: 100cqw; margin-left: 50%; transform: translateX(-50%); } /* 100cqw = the story area inside its gutters, scrollbar excluded */
+
+/* wider than the text column */
+.fig--wide { width: min(var(--wide), calc(100vw - 2 * var(--gutter))); margin-left: 50%; transform: translateX(-50%); }
+
+/* full bleed: a tinted band that runs edge to edge with the media centred inside */
+.fig--bleed {
+  width: 100vw; margin-left: 50%; transform: translateX(-50%);
+  padding: clamp(40px, 7vw, 112px) var(--gutter);
+  background: linear-gradient(160deg, var(--tint) 0%, var(--tint-deep) 100%);
+  margin-block: var(--sp-block);
+}
+.fig--bleed .fig-media { max-width: var(--wide); margin-inline: auto; box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .35); }
+.fig--bleed figcaption { color: var(--ink); max-width: var(--wide); margin-inline: auto; }
+/* ---------- Team cards: a row of three spanning the text column; stacks on phones ---------- */
+.team-cards {
+  list-style: none; padding: 0; margin: var(--sp-block) 0;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(12px, 1.6vw, 22px);
+}
+/* header and body rows are shared across the cards, so the headers match in height when one title wraps */
+.team-card {
+  display: grid; grid-row: span 2; grid-template-rows: subgrid; border-radius: 18px; overflow: hidden; background: #fff;
+  box-shadow: 0 12px 26px -10px rgba(0, 0, 0, .14), 0 2px 6px rgba(0, 0, 0, .04);
+}
+.section .team-card h3 {
+  margin: 0; padding: 16px 20px; background: #202020; color: #e2e2e2;
+  font-size: 18px; font-weight: 600; line-height: 1.4;
+}
+.team-cards--pair { grid-template-columns: repeat(2, minmax(0, 1fr)); } /* two cards splitting the column */
+/* five cards: a row of three, then two centred beneath (on a six-track grid each card spans two) */
+.team-cards--five { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.team-cards--five > .team-card { grid-column: span 2; }
+.team-cards--five > .team-card:nth-child(4) { grid-column: 2 / span 2; }
+.team-cards--five > .team-card:nth-child(n+4) { margin-top: clamp(12px, 1.6vw, 22px); }
+.section .team-card--me h3 { background: #ff92c6; color: #202020; }
+.team-card p { margin: 0; padding: 16px 20px 22px; color: var(--ink); line-height: 1.55; }
+
+/* ---------- Team rows: wordier cards stacked down the text column, dark header on the left, full text on the right ---------- */
+.team-rows { list-style: none; padding: 0; margin: var(--sp-block) 0; display: grid; gap: 14px; }
+.team-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); border-radius: 18px; overflow: hidden; background: #fff;
+  box-shadow: 0 12px 26px -10px rgba(0, 0, 0, .14), 0 2px 6px rgba(0, 0, 0, .04);
+}
+.section .team-row h3 { margin: 0; padding: 18px 20px; background: #202020; color: #e2e2e2; font-size: 18px; font-weight: 600; line-height: 1.4; }
+.team-row-body { padding: 18px 22px 20px; }
+.team-row-body > :is(p, ul) { margin: 0; line-height: 1.55; }
+.team-row-body > ul.list > li { margin-bottom: .45em; }
+.team-row-body > ul.list > li:last-child { margin-bottom: 0; }
+
+/* ---------- Screenshot rail: full-bleed horizontal scroller inside a story section ---------- */
+/* Breaks out of the text column to the full window so later items run off the right edge. */
+.shot-rail { width: 100vw; margin: calc(var(--sp-block) - 12px) 0 var(--sp-block) calc(50% - 50vw); }
+/* just enough rail padding for the shots' shadows (overflow-x scrolling clips them otherwise) */
+.shot-rail .rail { padding-block: 12px 4px; }
+.shot-rail .rail-nav { top: calc(12px + var(--card-h, 0px) / 2); }
+/* every shot shares one height and keeps its own width, so whole boards show and the captions line up */
+.shot-rail .rail {
+  --shot-h: clamp(265px, 27.8vw, 503px); grid-auto-columns: max-content;
+  /* start the first item on the text column's left edge instead of the page gutter */
+  --col-left: calc((100vw - min(var(--col), 100vw - 2 * var(--gutter))) / 2);
+  padding-left: var(--col-left); scroll-padding-left: var(--col-left);
+}
+.shot { margin: 0; }
+.shot-media { border-radius: var(--radius); overflow: hidden; background: #e7e7e7; box-shadow: var(--shadow); }
+/* plain shots: images that bring their own transparent backdrop and shadow get no box, fill or shadow */
+.shot--plain .shot-media { background: none; box-shadow: none; border-radius: 0; overflow: visible; }
+.shot-media img, .shot-media video { height: var(--shot-h); width: auto; max-width: none; }
+.shot figcaption { width: 0; min-width: 100%; margin-top: var(--sp-caption); color: var(--ink-soft); font-size: 15px; line-height: 1.5; text-align: center; text-wrap: balance; } /* wraps to the image's width */
+
+/* ---------- Pull quotes ---------- */
+.pullquote {
+  position: relative; margin: var(--sp-block) 0; padding: 8px 0 8px clamp(28px, 4vw, 56px);
+  border-left: 3px solid var(--accent);
+}
+.pullquote::before {
+  content: "\201C"; position: absolute; left: clamp(20px, 3.4vw, 46px); top: -.42em;
+  font-family: var(--serif); font-size: clamp(86px, 8.4vw, 132px); line-height: 1; color: var(--accent); opacity: .22; pointer-events: none;
+}
+.pullquote p { position: relative; font-family: var(--serif); font-size: clamp(22px, 1.8vw, 26px); line-height: 1.45; margin: 0; text-wrap: pretty; }
+/* plain variant: just the accent line beside ordinary body text, no quote mark */
+.pullquote--plain { padding: 4px 0 4px 24px; }
+/* the big quote mark pokes up .42em above the quote, so add that overhang to the space above it */
+.pullquote:not(.pullquote--plain) { margin-top: calc(var(--sp-block) + .25 * clamp(86px, 8.4vw, 132px)); }
+.pullquote--plain::before { content: none; }
+.pullquote--plain p { font-size: inherit; line-height: 1.6; }
+.pullquote footer { margin-top: var(--sp-caption); font-size: 14px; font-weight: 400; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+
+/* ---------- Two-up callout cards ---------- */
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: var(--sp-block) 0; }
+.duo > div { padding: 28px 30px; border-radius: var(--radius); background: color-mix(in srgb, var(--tint) 28%, var(--surface)); border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); }
+.duo p { margin: 0; }
+
+/* ---------- Chip row (short noun lists) ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 var(--sp-para); padding: 0; list-style: none; }
+.chips li { padding: 8px 18px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-weight: 400; font-size: 16px; }
+
+/* ---------- Dash list whose items each carry a figure (text, then its image/video) ---------- */
+.section ul.list--figs > li { margin-bottom: var(--sp-block); }
+.section ul.list--figs > li > p { margin: 0; }
+.section ul.list--figs > li > .fig { margin: var(--sp-head) 0 0; }
+
+/* ---------- Expanding gallery (multiple images in one visual) ---------- */
+.expand {
+  width: min(var(--wide), calc(100vw - 2 * var(--gutter))); margin: var(--sp-block) 0; margin-left: 50%; transform: translateX(-50%);
+}
+.expand-track { display: flex; gap: 10px; height: var(--h, 460px); }
+.panel {
+  --grow: 1; position: relative; flex: var(--grow) 1 0; min-width: 0; margin: 0;
+  border-radius: var(--radius); overflow: hidden; cursor: pointer; background: #e2e2e2;
+  box-shadow: 0 14px 30px -18px rgba(0, 0, 0, .35);
+  transition: flex-grow .6s var(--ease), box-shadow .4s var(--ease);
+}
+.panel.is-active { --grow: var(--active-grow, 5); cursor: default; box-shadow: var(--shadow); }
+.panel img, .panel video { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, center); transition: filter .5s var(--ease), transform .8s var(--ease); }
+.panel:not(.is-active) img, .panel:not(.is-active) video { filter: saturate(.55) brightness(.92); }
+.panel:not(.is-active):hover img, .panel:not(.is-active):hover video { filter: none; }
+.panel-num {
+  position: absolute; left: 12px; top: 12px; min-width: 30px; height: 30px; padding: 0 9px; border-radius: 999px;
+  display: grid; place-items: center; background: rgba(255, 255, 255, .88); color: var(--ink);
+  font-size: 13px; font-weight: 500; font-variant-numeric: tabular-nums; pointer-events: none;
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+.panel.is-active .panel-num { background: var(--accent); color: #fff; }
+.panel figcaption { display: none; }
+.expand-caption { display: flex; justify-content: center; align-items: baseline; gap: 12px; margin-top: var(--sp-caption); min-height: 1.5em; color: var(--ink-soft); font-size: 15px; text-align: center; }
+.expand-caption b { font-weight: 500; color: var(--accent); font-variant-numeric: tabular-nums; }
+.expand-group { margin: 6px 0 0; text-align: center; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+/* ---------- Other work: the last thing on a project page, with empty space below ---------- */
+.other { padding: var(--sp-section) 0; }
+.other > h2 { font-size: 24px; line-height: 1.25; padding: 0 var(--gutter); max-width: calc(var(--col) + 2 * var(--gutter)); margin: 0 auto calc(var(--sp-head) - 4px); }
+.other .rail { padding-block: 4px; }
+/* The rail spans exactly the text column: the two cards split it, with the landing page's gap between them. */
+.other .rail {
+  padding-inline: calc((100% - min(var(--col), 100% - 2 * var(--gutter))) / 2);
+  grid-auto-columns: calc((100% - clamp(20px, 2.4vw, 40px)) / 2);
+}
+
+
+/* ---------- Reveal on scroll ---------- */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+.fig--wide.reveal, .fig--full.reveal, .fig--bleed.reveal, .expand.reveal { transform: translate(-50%, 24px); }
+.fig--wide.reveal.in, .fig--full.reveal.in, .fig--bleed.reveal.in, .expand.reveal.in { transform: translateX(-50%); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 760px) {
+  .hero-banner { aspect-ratio: 4 / 3; }
+}
+@media (max-width: 760px) {
+  :root { --sp-block: 28px; --sp-section: 56px; }
+  .meta, .duo { grid-template-columns: 1fr; }
+  .team-cards { grid-template-columns: 1fr; row-gap: 14px; }
+  .team-cards--five > .team-card, .team-cards--five > .team-card:nth-child(n) { grid-column: auto; margin-top: 0; }
+  .shot-rail .rail { --shot-h: 74vw; }
+  .team-card { grid-row: auto; grid-template-rows: auto; }
+  .team-row { grid-template-columns: 1fr; }
+  /* phones: no one-screen lock; photos side by side, bio underneath */
+  body.page-about { height: auto; overflow: visible; display: block; }
+  .about { overflow: visible; container-type: normal; }
+  /* minmax(0, …) so the photos can't grow to their image's natural width and push the page sideways */
+  .about-row { --card: auto; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); row-gap: var(--sp-block); padding: var(--sp-block) var(--gutter) var(--sp-section); }
+  .about-text { grid-column: 1 / -1; justify-self: stretch; width: auto; }
+  .meta { gap: 32px; }
+  .rail { --card: min(78vw, 340px); }
+  .landing .rail { --card: calc(.98 * min(78vw, 340px, (100cqh - 210px) * 5 / 7)); }
+  :is(.home, .page-about) .pill, :is(.home, .page-about) .header-links a:not(.pill) { padding: 5px 13px; }
+  :is(.home, .page-about) .header-links { --hl-pad: 13px; }
+  .other .rail { --card: calc(.945 * min(78vw, 340px)); grid-auto-columns: var(--card); justify-content: start; }
+  .rail-nav, .rail-fade { display: none; }
+  .header-links a { font-size: 16px; }
+  .pill { padding: 7px 18px; }
+  .topnav { font-size: 14px; }
+
+  /* gallery becomes a swipeable strip, each image with its own caption */
+  .expand { width: 100vw; }
+  .expand-track { height: auto; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 var(--gutter) 8px; gap: 12px; scrollbar-width: none; }
+  .expand-track::-webkit-scrollbar { display: none; }
+  .panel { flex: 0 0 84%; scroll-snap-align: center; cursor: default; background: none; box-shadow: none; overflow: visible; border-radius: 0; }
+  .panel img, .panel video { height: auto; border-radius: var(--radius); box-shadow: 0 14px 30px -18px rgba(0, 0, 0, .35); }
+  .panel:not(.is-active) img, .panel:not(.is-active) video { filter: none; }
+  .panel figcaption { display: block; margin-top: 12px; font-size: 15px; color: var(--ink-soft); text-align: left; }
+  .panel-num { background: var(--accent) !important; color: #fff !important; }
+  .expand-caption { display: none; }
+  .expand-group { padding: 0 var(--gutter); text-align: left; }
+}
+
+/* Small phones: the landing/about header (name + About, Resume, Contact) has to fit in ~360px */
+@media (max-width: 480px) {
+  :is(.home, .page-about) .wordmark { font-size: 20px; }
+  :is(.home, .page-about) .header-links a { font-size: 14px; }
+  :is(.home, .page-about) .pill, :is(.home, .page-about) .header-links a:not(.pill) { padding: 5px 10px; }
+  :is(.home, .page-about) .header-links { --hl-pad: 10px; gap: 0; }
+}
+
+/* Short screens (phones held sideways). The landing page stays one screen with no vertical scroll: the header is
+   tightened and the cards shrink to fit the height, reserving just enough for the one-line title and subtitle.
+   The About page has too much text for one screen, so it scrolls like a normal page. */
+@media (max-height: 520px) {
+  :root { --head-top: 14px; }
+  /* 116px = rail padding + gap + up to two lines each of the (smaller) title and subtitle */
+  .landing .rail {
+    --card: calc(.98 * min(clamp(120px, calc((100vw - 2 * var(--gutter) - 3 * 40px) / 4), 440px), (100cqh - 116px) * 5 / 7));
+    padding-block: 8px 10px;
+  }
+  .landing .card-sub { margin-top: 10px; font-size: 15px; line-height: 1.3; }
+  .landing .card-note { font-size: 14px; line-height: 1.35; }
+  body.page-about { height: auto; overflow: visible; display: block; }
+}
+@media (max-height: 520px) and (min-width: 761px) {
+  .about { overflow: visible; container-type: normal; }
+  .about-row { --card: min(22vw, 220px); padding: 24px var(--gutter) 56px; }
+}
+
+/* iPad portrait and phones held sideways (761-1024px wide): the About page stacks vertically, with both photos side
+   by side on top and the bio underneath; it scrolls like a normal page */
+@media (min-width: 761px) and (max-width: 1024px) {
+  body.page-about { height: auto; overflow: visible; display: block; }
+  .about { overflow: visible; container-type: normal; }
+  .about-row {
+    --card: auto; grid-template-columns: repeat(2, minmax(0, min(34vw, 280px))) minmax(0, 1fr);
+    row-gap: var(--sp-block); padding: var(--sp-block) var(--gutter) var(--sp-section);
+  }
+  .about-photo:nth-child(1) { grid-column: 1; grid-row: 1; }
+  .about-photo:nth-child(2) { grid-column: 2; grid-row: 1; }
+  .about-text { grid-column: 1 / -1; grid-row: 2; justify-self: stretch; width: auto; }
+  .about-photo { animation: text-up .45s var(--ease) calc(var(--i, 0) * .07s) both; }
+}
+/* Phone portrait: the landing cards become a vertical list the page scrolls through, instead of a sideways row */
+@media (max-width: 760px) and (min-height: 521px) {
+  body.home { height: auto; overflow: visible; display: block; }
+  .landing { container-type: normal; padding: 8px 0 var(--sp-section); }
+  .landing .rail {
+    --card: auto; grid-auto-flow: row; grid-template-columns: minmax(0, 1fr); grid-auto-columns: auto;
+    row-gap: var(--sp-block); overflow: visible; padding-block: 16px 0;
+  }
+  /* the sideways deal doesn't suit a column: each card rises in, one after another */
+  .landing .card { animation: text-up .45s var(--ease) calc(var(--i, 0) * .07s) both; }
+  .landing .card-title, .landing .card-sub, .landing .card-note { animation: none; }
+}
+
+/* iPad portrait and phones held sideways: header-width figures shrink back to the text column */
+@media (min-width: 761px) and (max-width: 1024px) {
+  .fig--full { width: 100%; margin-left: 0; transform: none; }
+  .fig--full.reveal { transform: translateY(24px); }
+  .fig--full.reveal.in { transform: none; }
+}
+
+/* Phone portrait: "Other work" cards stack vertically instead of scrolling sideways */
+@media (max-width: 760px) {
+  .other .rail {
+    --card: auto; grid-auto-flow: row; grid-template-columns: minmax(0, 1fr); grid-auto-columns: auto;
+    row-gap: var(--sp-block); overflow: visible;
+  }
+}
+
+/* Phone portrait: every screenshot/video carousel becomes a plain vertical stack at the text column's width */
+@media (max-width: 760px) {
+  .shot-rail { width: auto; margin: var(--sp-block) 0; }
+  .shot-rail .rail {
+    grid-auto-flow: row; grid-template-columns: minmax(0, 1fr); grid-auto-columns: auto;
+    row-gap: var(--sp-block); overflow: visible; padding: 0;
+  }
+  .shot-media img, .shot-media video { width: 100%; height: auto; }
+  .shot figcaption { width: auto; min-width: 0; }
+}
