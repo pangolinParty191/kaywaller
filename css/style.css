@@ -673,8 +673,9 @@ mark.todo { background: #fff1a8; color: var(--ink); padding: 1px 5px; border-rad
 }
 
 /* Touch screens (phones and tablets) can't hover: a tap would otherwise leave a hover state stuck on.
-   Every hover effect is reset to its resting look. */
-@media (hover: none) {
+   Every hover effect is reset to its resting look. Some Android phones (e.g. Samsung, with stylus support) claim
+   they can hover, so phone/tablet widths and touch-first pointers are included too, not just (hover: none). */
+@media (hover: none), (pointer: coarse), (max-width: 1024px) {
   .header-links a:not(.pill):hover { text-decoration: none; }
   :is(.home, .page-about) .header-links a:not(.pill):hover { background: none; }
   .pill:hover { background: transparent; color: inherit; }
