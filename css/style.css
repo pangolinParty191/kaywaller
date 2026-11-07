@@ -671,3 +671,26 @@ mark.todo { background: #fff1a8; color: var(--ink); padding: 1px 5px; border-rad
   .shot-media img, .shot-media video { width: 100%; height: auto; }
   .shot figcaption { width: auto; min-width: 0; }
 }
+
+/* Touch screens (phones and tablets) can't hover: a tap would otherwise leave a hover state stuck on.
+   Every hover effect is reset to its resting look. */
+@media (hover: none) {
+  .header-links a:not(.pill):hover { text-decoration: none; }
+  :is(.home, .page-about) .header-links a:not(.pill):hover { background: none; }
+  .pill:hover { background: transparent; color: inherit; }
+  .rail-nav:hover { transform: none; }
+  a.card .card-media:hover .card-hover { opacity: 0; }
+  a.card .card-media:hover img { transform: none; filter: none; }
+  :is(.landing, .other) a.card .card-media:hover :is(.card-hover svg, .card-hover-label) { animation: none; }
+  .topnav a:hover span { text-decoration: none; }
+  .topnav a:first-child:hover svg, .topnav a:last-child:hover svg { transform: none; }
+  .phead .topnav a:hover { background: color-mix(in srgb, var(--bg) 20%, transparent); }
+  .jump:hover { background: color-mix(in srgb, var(--bg) 20%, transparent); }
+  .jump:hover svg, .to-top:hover svg { transform: none; }
+  .to-top:hover { background: color-mix(in srgb, var(--bg) 82%, transparent); }
+}
+
+/* iPads and phones (up to 1180px wide, either orientation): "Back to top" sits as far from the bottom as from the left */
+@media (max-width: 1180px) {
+  .to-top { bottom: var(--gutter); }
+}
